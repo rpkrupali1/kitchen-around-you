@@ -5,6 +5,7 @@ erDiagram
     Class ||--|{ ClassDetails : oneToOne
     ClassDetails ||--|{ Ingredients : multiple
     Ingredients ||--|{ Measurments: multiple
+    Users ||--|{ Registrations : multiple
 
 
     Class {
@@ -44,5 +45,6 @@ erDiagram
         inetger user_id
         integer class_id
     }
+
 
 ```
