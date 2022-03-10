@@ -43,6 +43,6 @@ erDiagram
     registration {
         integer id
         inetger user_id
-        integer class_id
+        integer programme_id
     }
 ```
