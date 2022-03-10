@@ -6,6 +6,7 @@ erDiagram
     ProgrammeDetails ||--|{ Ingredients : multiple
     Ingredients ||--|{ Measurments: oneToOne
     Users ||--|{ registration : multiple
+    Programme ||--|{ registration : oneToMany
 
     Programme {
         integer id
