@@ -3,6 +3,7 @@ const seedUsers = require("./user-seeds");
 const seedMeasurements = require("./measurement-seeds");
 const seedIngredients = require("./ingredient-seeds");
 const seesProgramms = require("./programme-seeds");
+const seedProgrammeDetails = require("./programme-details-seeds");
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
@@ -14,6 +15,8 @@ const seedAll = async () => {
   await seedIngredients();
   console.log("--------------");
   await seesProgramms();
+  console.log("--------------");
+  await seedProgrammeDetails();
 };
 
 seedAll();
