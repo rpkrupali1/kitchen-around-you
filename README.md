@@ -2,21 +2,21 @@
 
 ```mermaid
 erDiagram
-    Class ||--|{ ClassDetails : oneToOne
-    ClassDetails ||--|{ Ingredients : multiple
-    Ingredients ||--|{ Measurments: multiple
-    Users ||--|{ Registrations : multiple
+    Programme ||--|{ ProgrammeDetails : oneToMany
+    ProgrammeDetails ||--|{ Ingredients : multiple
+    Ingredients ||--|{ Measurments: oneToOne
+    Users ||--|{ registration : multiple
 
-
-    Class {
+    Programme {
         integer id
         string title
-        date day/time
+        date from_date
+        date to_date
         text description
-        decimal fees
+        decimal tution
     }
 
-    ClassDetails {
+  ProgrammeDetails {
         integer id
         integer ingredient_id
         inetger quantity
@@ -30,8 +30,8 @@ erDiagram
 
     Measurments {
         integer id
-        string unit 
-        
+        string unit
+
     }
 
     Users {
@@ -45,6 +45,4 @@ erDiagram
         inetger user_id
         integer class_id
     }
-
-
 ```
