@@ -3,7 +3,7 @@ const seedUsers = require("./user-seeds");
 const seedMeasurements = require("./measurement-seeds");
 const seedIngredients = require("./ingredient-seeds");
 const seesProgramms = require("./program-seeds");
-const seedProgrammeDetails = require("./programme-details-seeds");
+const seedProgrammeDetails = require("./program-detail-seeds");
 const seedRegistration = require("./registration-seeds");
 
 const seedAll = async () => {

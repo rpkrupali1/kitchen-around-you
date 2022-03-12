@@ -2,7 +2,7 @@ const User = require("./User");
 const Measurment = require("./Measurment");
 const Ingredient = require("./Ingredient");
 const Program = require("./Program");
-const ProgrammeDetails = require("./ProgrammeDetails");
+const ProgramDetail = require("./ProgramDetail");
 const Registration = require("./Registration");
 
 Ingredient.belongsTo(Measurment, {
@@ -13,19 +13,19 @@ Measurment.hasOne(Ingredient, {
   foreignKey: "measurment_id",
 });
 
-Program.hasMany(ProgrammeDetails, {
-  foreignKey: "programme_id",
+Program.hasMany(ProgramDetail, {
+  foreignKey: "program_id",
 });
 
-ProgrammeDetails.belongsTo(Program, {
-  foreignKey: "programme_id",
+ProgramDetail.belongsTo(Program, {
+  foreignKey: "program_id",
 });
 
-ProgrammeDetails.belongsTo(Ingredient, {
+ProgramDetail.belongsTo(Ingredient, {
   foreignKey: "ingredient_id",
 });
 
-Ingredient.hasMany(ProgrammeDetails, {
+Ingredient.hasMany(ProgramDetail, {
   foreignKey: "ingredient_id",
 });
 
@@ -38,11 +38,11 @@ Registration.belongsTo(User, {
 });
 
 Program.hasMany(Registration, {
-  foreignKey: "programme_id",
+  foreignKey: "program_id",
 });
 
 Registration.belongsTo(Program, {
-  foreignKey: "programme_id",
+  foreignKey: "program_id",
 });
 
 module.exports = {
@@ -50,6 +50,6 @@ module.exports = {
   Measurment,
   Ingredient,
   Program,
-  ProgrammeDetails,
+  ProgramDetail,
   Registration,
 };

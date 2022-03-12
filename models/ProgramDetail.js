@@ -1,8 +1,8 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class ProgrammeDetails extends Model {}
-ProgrammeDetails.init(
+class ProgramDetail extends Model {}
+ProgramDetail.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -10,11 +10,11 @@ ProgrammeDetails.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    programme_id: {
+    program_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "programme",
+        model: "program",
         key: "id",
       },
     },
@@ -36,8 +36,8 @@ ProgrammeDetails.init(
     underscored: true,
     freezeTableName: true,
     timestamps: true,
-    modelName: "programmeDetail",
+    modelName: "programdetail",
   }
 );
 
-module.exports = ProgrammeDetails;
+module.exports = ProgramDetail;

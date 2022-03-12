@@ -1,14 +1,9 @@
 const router = require("express").Router();
-const {
-  Program,
-  ProgramDetail,
-  Ingredient,
-  Measurment,
-} = require("../../models");
+const { ProgramDetail } = require("../../models");
 
-//get all Programms
+//get all ProgramDetail
 router.get("/", (req, res) => {
-  Program.findAll()
+  ProgramDetail.findAll()
     .then((dbMeasureData) => {
       res.json(dbMeasureData);
     })
@@ -18,34 +13,12 @@ router.get("/", (req, res) => {
     });
 });
 
-// get specific Program
+// get specific ProgramDetail
 router.get("/:id", (req, res) => {
-  Program.findOne({
+  ProgramDetail.findOne({
     where: {
       id: req.params.id,
     },
-    attributes: [
-      "id",
-      "title",
-      "description",
-      "tution",
-      "from_date",
-      "to_date",
-    ],
-    include: [
-      {
-        model: ProgramDetail,
-        attributes: ["program_id", "ingredient_id", "quantity"],
-        include: {
-          model: Ingredient,
-          attributes: ["name"],
-          include: {
-            model: Measurment,
-            attributes: ["unit"],
-          },
-        },
-      },
-    ],
   })
     .then((dbMeasureData) => {
       res.json(dbMeasureData);
@@ -56,14 +29,12 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//create Program
+//create ProgramDetail
 router.post("/", (req, res) => {
-  Program.create({
-    title: req.body.title,
-    description: req.body.description,
-    tution: req.body.tution,
-    from_date: req.body.from_date,
-    to_date: req.body.to_date,
+  ProgramDetail.create({
+    program_id: req.body.program_id,
+    ingredient_id: req.body.ingredient_id,
+    quantity: req.body.quantity,
   })
     .then((dbMeasureData) => res.json(dbMeasureData))
     .catch((err) => {
@@ -72,16 +43,18 @@ router.post("/", (req, res) => {
     });
 });
 
-//update Program
+//update ProgramDetail
 router.put("/:id", (req, res) => {
-  Program.update(req.body, {
+  ProgramDetail.update(req.body, {
     where: {
       id: req.params.id,
     },
   })
     .then((dbMeasureData) => {
       if (!dbMeasureData) {
-        res.status(404).json({ message: "No Program found with this id" });
+        res
+          .status(404)
+          .json({ message: "No ProgramDetail found with this id" });
         return;
       }
       res.json(dbMeasureData);
@@ -92,17 +65,19 @@ router.put("/:id", (req, res) => {
     });
 });
 
-//delete Program
+//delete ProgramDetail
 router.delete("/:id", (req, res) => {
   console.log("id", req.params.id);
-  Program.destroy({
+  ProgramDetail.destroy({
     where: {
       id: req.params.id,
     },
   })
     .then((dbMeasureData) => {
       if (!dbMeasureData) {
-        res.status(404).json({ message: "No Program found with this id" });
+        res
+          .status(404)
+          .json({ message: "No ProgramDetail found with this id" });
         return;
       }
       res.json(dbMeasureData);
