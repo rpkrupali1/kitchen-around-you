@@ -4,6 +4,8 @@ const {
   ProgramDetail,
   Ingredient,
   Measurment,
+  Registration,
+  User,
 } = require("../../models");
 
 //get all Programms
@@ -43,6 +45,14 @@ router.get("/:id", (req, res) => {
             model: Measurment,
             attributes: ["unit"],
           },
+        },
+      },
+      {
+        model: Registration,
+        attributes: ["id", "user_id"],
+        include: {
+          model: User,
+          attributes: ["email"],
         },
       },
     ],
