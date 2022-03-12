@@ -33,6 +33,10 @@ const ingredientdata = [
     name: "all purpose flour",
     measurment_id: 1,
   },
+  {
+    name: "honey",
+    measurment_id: 3,
+  },
 ];
 
 const seedUsers = () =>

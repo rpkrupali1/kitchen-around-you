@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const { Registration } = require("../../models");
+const { ProgramDetail } = require("../../models");
 
-//get all registrations
+//get all ProgramDetail
 router.get("/", (req, res) => {
-  Registration.findAll()
+  ProgramDetail.findAll()
     .then((dbMeasureData) => {
       res.json(dbMeasureData);
     })
@@ -13,9 +13,9 @@ router.get("/", (req, res) => {
     });
 });
 
-// get specific registration
+// get specific ProgramDetail
 router.get("/:id", (req, res) => {
-  Registration.findOne({
+  ProgramDetail.findOne({
     where: {
       id: req.params.id,
     },
@@ -29,11 +29,12 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//create registration
+//create ProgramDetail
 router.post("/", (req, res) => {
-  Registration.create({
-    user_id: req.body.user_id,
+  ProgramDetail.create({
     program_id: req.body.program_id,
+    ingredient_id: req.body.ingredient_id,
+    quantity: req.body.quantity,
   })
     .then((dbMeasureData) => res.json(dbMeasureData))
     .catch((err) => {
@@ -42,16 +43,18 @@ router.post("/", (req, res) => {
     });
 });
 
-//update registration
+//update ProgramDetail
 router.put("/:id", (req, res) => {
-  Registration.update(req.body, {
+  ProgramDetail.update(req.body, {
     where: {
       id: req.params.id,
     },
   })
     .then((dbMeasureData) => {
       if (!dbMeasureData) {
-        res.status(404).json({ message: "No registration found with this id" });
+        res
+          .status(404)
+          .json({ message: "No ProgramDetail found with this id" });
         return;
       }
       res.json(dbMeasureData);
@@ -62,17 +65,19 @@ router.put("/:id", (req, res) => {
     });
 });
 
-//delete registration
+//delete ProgramDetail
 router.delete("/:id", (req, res) => {
   console.log("id", req.params.id);
-  Registration.destroy({
+  ProgramDetail.destroy({
     where: {
       id: req.params.id,
     },
   })
     .then((dbMeasureData) => {
       if (!dbMeasureData) {
-        res.status(404).json({ message: "No registration found with this id" });
+        res
+          .status(404)
+          .json({ message: "No ProgramDetail found with this id" });
         return;
       }
       res.json(dbMeasureData);

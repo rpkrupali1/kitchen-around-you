@@ -18,11 +18,11 @@ Registration.init(
         key: "id",
       },
     },
-    programme_id: {
+    program_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "programme",
+        model: "program",
         key: "id",
       },
     },
