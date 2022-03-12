@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const sequelize = require("../../config/connection");
 const {
   Program,
   ProgramDetail,
@@ -33,6 +34,12 @@ router.get("/:id", (req, res) => {
       "tution",
       "from_date",
       "to_date",
+      [
+        sequelize.literal(
+          "(SELECT COUNT(*) FROM registration WHERE program.id = registration.program_id)"
+        ),
+        "total_admissions",
+      ],
     ],
     include: [
       {
