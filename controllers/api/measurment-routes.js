@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const { Ingredient, Measurment } = require("../../models");
+const { Measurment } = require("../../models");
 
-//get all ingredient
+//get all measurements
 router.get("/", (req, res) => {
-  Ingredient.findAll()
+  Measurment.findAll()
     .then((dbMeasureData) => {
       res.json(dbMeasureData);
     })
@@ -13,16 +13,11 @@ router.get("/", (req, res) => {
     });
 });
 
-// get specific ingredient
+// get specific measurement
 router.get("/:id", (req, res) => {
-  Ingredient.findOne({
+  Measurment.findOne({
     where: {
       id: req.params.id,
-    },
-    attributes: ["id", "name", "measurment_id", "created_at"],
-    include: {
-      model: Measurment,
-      attributes: ["unit"],
     },
   })
     .then((dbMeasureData) => {
@@ -34,11 +29,10 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//create ingredient
+//create measurement
 router.post("/", (req, res) => {
-  Ingredient.create({
-    name: req.body.name,
-    measurment_id: req.body.measurment_id
+  Measurment.create({
+    unit: req.body.unit,
   })
     .then((dbMeasureData) => res.json(dbMeasureData))
     .catch((err) => {
@@ -49,7 +43,10 @@ router.post("/", (req, res) => {
 
 //update measurement unit
 router.put("/:id", (req, res) => {
-  Ingredient.update(req.body,
+  Measurment.update(
+    {
+      unit: req.body.unit,
+    },
     {
       where: {
         id: req.params.id,
@@ -58,7 +55,7 @@ router.put("/:id", (req, res) => {
   )
     .then((dbMeasureData) => {
       if (!dbMeasureData) {
-        res.status(404).json({ message: "No Ingredient found with this id" });
+        res.status(404).json({ message: "No measurement found with this id" });
         return;
       }
       res.json(dbMeasureData);
@@ -69,17 +66,17 @@ router.put("/:id", (req, res) => {
     });
 });
 
-//delete ingredient
+//delete measurement
 router.delete("/:id", (req, res) => {
   console.log("id", req.params.id);
-  Ingredient.destroy({
+  Measurment.destroy({
     where: {
       id: req.params.id,
     },
   })
     .then((dbMeasureData) => {
       if (!dbMeasureData) {
-        res.status(404).json({ message: "No Ingredient found with this id" });
+        res.status(404).json({ message: "No measurement found with this id" });
         return;
       }
       res.json(dbMeasureData);

@@ -87,4 +87,28 @@ router.delete('/:id', (req,res)=>{
     });
 });
 
+//login route for user
+router.post("/login", (req, res) => {
+    User.findOne({
+      where: {
+        email: req.body.email,
+      },
+    }).then((dbUserData) => {
+      if (!dbUserData) {
+        res.status(404).json({ message: "No user with this email exist" });
+        return;
+      }
+      //verify password if data is returned
+      const validPassword = dbUserData.checkPassword(req.body.password);
+      if (!validPassword) {
+        res.status(404).json({ message: "Username and password does not match" });
+        return;
+      }
+      res.json({
+        user: dbUserData,
+        message: "You are now logged in",
+      });
+    });
+  });
+
 module.exports = router;
