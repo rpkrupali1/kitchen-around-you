@@ -2,7 +2,7 @@ const sequelize = require("../config/connection");
 const seedUsers = require("./user-seeds");
 const seedMeasurements = require("./measurement-seeds");
 const seedIngredients = require("./ingredient-seeds");
-const seesProgramms = require("./programme-seeds");
+const seesProgramms = require("./program-seeds");
 const seedProgrammeDetails = require("./programme-details-seeds");
 const seedRegistration = require("./registration-seeds");
 
