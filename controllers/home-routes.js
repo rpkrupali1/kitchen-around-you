@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 // Get homepage handlebar template
 router.get('/', (req, res) => {
-    res.render('homepage');
+    
 });
 
 // Get login handlebar template
