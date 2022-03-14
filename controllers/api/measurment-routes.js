@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const { Registration } = require("../../models");
+const { Measurment } = require("../../models");
 
-//get all registrations
+//get all measurements
 router.get("/", (req, res) => {
-  Registration.findAll()
+  Measurment.findAll()
     .then((dbMeasureData) => {
       res.json(dbMeasureData);
     })
@@ -13,9 +13,9 @@ router.get("/", (req, res) => {
     });
 });
 
-// get specific registration
+// get specific measurement
 router.get("/:id", (req, res) => {
-  Registration.findOne({
+  Measurment.findOne({
     where: {
       id: req.params.id,
     },
@@ -29,11 +29,10 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//create registration
+//create measurement
 router.post("/", (req, res) => {
-  Registration.create({
-    user_id: req.body.user_id,
-    program_id: req.body.program_id,
+  Measurment.create({
+    unit: req.body.unit,
   })
     .then((dbMeasureData) => res.json(dbMeasureData))
     .catch((err) => {
@@ -42,16 +41,21 @@ router.post("/", (req, res) => {
     });
 });
 
-//update registration
+//update measurement unit
 router.put("/:id", (req, res) => {
-  Registration.update(req.body, {
-    where: {
-      id: req.params.id,
+  Measurment.update(
+    {
+      unit: req.body.unit,
     },
-  })
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
     .then((dbMeasureData) => {
       if (!dbMeasureData) {
-        res.status(404).json({ message: "No registration found with this id" });
+        res.status(404).json({ message: "No measurement found with this id" });
         return;
       }
       res.json(dbMeasureData);
@@ -62,17 +66,17 @@ router.put("/:id", (req, res) => {
     });
 });
 
-//delete registration
+//delete measurement
 router.delete("/:id", (req, res) => {
   console.log("id", req.params.id);
-  Registration.destroy({
+  Measurment.destroy({
     where: {
       id: req.params.id,
     },
   })
     .then((dbMeasureData) => {
       if (!dbMeasureData) {
-        res.status(404).json({ message: "No registration found with this id" });
+        res.status(404).json({ message: "No measurement found with this id" });
         return;
       }
       res.json(dbMeasureData);

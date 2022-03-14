@@ -1,13 +1,16 @@
-const router = require('express').Router();
-const classRoutes = require('./class-routes');
-const classDetailRoutes = require('./class_details-routes');
-const ingredientRoutes = require('./ingredient-routes');
-const userRoutes = require('./user-routes');
+const router = require("express").Router();
+const ingredientRoutes = require("./ingredient-routes");
+const userRoutes = require("./user-routes");
+const measurementRoutes = require("./measurment-routes");
+const programRoutes = require("./program-routes");
+const programDetailRoutes = require("./program_details-routes");
+const registrationRoutes = require("./registration-routes");
 
-
-// router.use('/classes', classRoutes);
-// router.use('/class_details', classDetailRoutes);
-// router.use('/ingredients', ingredientRoutes);
-// router.use('/users', userRoutes);
+router.use("/users", userRoutes);
+router.use("/measurments", measurementRoutes);
+router.use("/ingredients", ingredientRoutes);
+router.use("/programs", programRoutes);
+router.use("/programdetails", programDetailRoutes);
+router.use("/registrations", registrationRoutes);
 
 module.exports = router;
