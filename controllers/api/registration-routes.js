@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { Registration } = require("../../models");
+const { Registration, User } = require("../../models");
+const { transporter } = require("../../utils/mailer");
 
 //get all registrations
 router.get("/", (req, res) => {
@@ -31,11 +32,40 @@ router.get("/:id", (req, res) => {
 
 //create registration
 router.post("/", (req, res) => {
-  Registration.create({
-    user_id: req.body.user_id,
-    program_id: req.body.program_id,
-  })
-    .then((dbMeasureData) => res.json(dbMeasureData))
+  Registration.create(
+    {
+      user_id: req.body.user_id,
+      program_id: req.body.program_id,
+    },
+    {
+      include: [
+        {
+          model: User,
+          attributes: ["email"],
+        },
+      ],
+    }
+  )
+    .then((dbMeasureData) => {
+      User.findOne({
+        where: {
+          id: dbMeasureData.user_id,
+        },
+      }).then((userData) => {
+        const email = userData.email;
+        const mailData = {
+          from: "kitchenaroundyou@gmail.com",
+          to: email,
+          subject: "Registered successfully",
+          text: `Hello, You have successfully registered for our class. Welcome to Kitchen Around You family.`,
+        };
+        //send email once user register
+        transporter.sendMail(mailData, (err, info) => {
+          if (err) return res.status(400).json({ error: err });
+          res.json(dbMeasureData);
+        });
+      });
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
