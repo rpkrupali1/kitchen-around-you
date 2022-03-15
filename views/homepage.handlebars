@@ -1,10 +1,10 @@
 {{!-- Begin Hero --}}
-      <section class="hero is-medium is-link">
-        <div class="hero-body">
-          <p class="title">
+      <section class="hero is-large has-text-centered">
+        <div class="hero-body bg-img">
+          <p class="title white">
             Anyone can cook!
           </p>
-          <p class="subtitle">
+          <p class="subtitle white">
             Scroll down to pick a program and learn how today!
           </p>
         </div>
@@ -15,12 +15,12 @@
       <section class="section">
           
         <div class="container has-text-centered">
-            <h1 class="title pb-3">Program Offerings</h1>
+            <h1 class="title pb-3">Program Offerings:</h1>
         </div>
 
         {{#each programs as |program|}}
-        <div class="box">
-            <a class="subtitle pb-1" href="/program/{{program.id}}">{{program.title}}</a>
+        <div class="box has-background-primary">
+            <a class="subtitle pb-1 has-text-white" href="">{{program.title}}</a>
             <p class="block">Program dates: {{format_date program.from_date}} - {{format_date program.to_date}}</p>
             <p class="block">Tuition cost: ${{program.tution}}</p>
         </div>
