@@ -1,29 +1,35 @@
-{{!-- Begin Hero --}}
+{{! Begin Hero }}
 <section class="hero is-medium is-link">
-        <div class="hero-body">
-          <p class="title">
-            Anyone can cook!
-          </p>
-          <p class="subtitle">
-            Scroll down to pick a program and learn how today!
-          </p>
-        </div>
-      </section>
-      <!-- End Hero -->
+  <div class="hero-body">
+    <p class="title">
+      Anyone can cook!
+    </p>
+    <p class="subtitle">
+      Scroll down to pick a program and learn how today!
+    </p>
+  </div>
+</section>
+<!-- End Hero -->
 
-      <!-- Class List Begin -->
-      <section class="section">
-          
-        <div class="container has-text-centered">
-            <h1 class="title pb-3">Program Offerings</h1>
-        </div>
+<!-- Class List Begin -->
+<section class="section">
 
-        {{#each programs as |program|}}
-        <div class="box">
-            <a class="subtitle pb-1">{{program.title}}</a>
-            <p class="block">Program dates: {{format_date program.from_date}} - {{format_date program.to_date}}</p>
-            <p class="block">Tuition cost: ${{program.tution}}</p>
-        </div>
-        {{/each}}
+  <div class="container has-text-centered">
+    <h1 class="title pb-3">Program Offerings</h1>
+  </div>
 
-      </section>
+  {{#each programs as |program|}}
+    <div class="box">
+      <a
+        class="subtitle pb-1"
+        href="/program/{{program.id}}/"
+      >{{program.title}}</a>
+      <p class="block">Program dates:
+        {{format_date program.from_date}}
+        -
+        {{format_date program.to_date}}</p>
+      <p class="block">Tuition cost: ${{program.tution}}</p>
+    </div>
+  {{/each}}
+
+</section>

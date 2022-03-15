@@ -12,7 +12,7 @@ const {
 // Get homepage handlebar template
 router.get("/", (req, res) => {
   Program.findAll({
-    attributes: ["title", "tution", "from_date", "to_date"],
+    attributes: ["id", "title", "tution", "from_date", "to_date"],
   })
     .then((dbProgramData) => {
       // take programs and serialize them into a seperate programs array to be used
@@ -37,7 +37,6 @@ router.get("/login", (req, res) => {
     res.redirect("/");
     return;
   }
-
   res.render("login");
 });
 

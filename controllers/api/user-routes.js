@@ -162,7 +162,6 @@ router.post("/login", (req, res) => {
       res.status(404).json({ message: "Username and password does not match" });
       return;
     }
-
     req.session.save(() => {
       // declare session variables
       req.session.user_id = dbUserData.id;
