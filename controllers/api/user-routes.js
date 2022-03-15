@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const { transporter } = require("../../utils/mailer");
+
 const {
   User,
   Registration,
@@ -78,7 +80,19 @@ router.post("/", (req, res) => {
     email: req.body.email,
     password: req.body.password,
   })
-    .then((dbUserData) => res.json(dbUserData))
+    .then((dbUserData) => {
+      const mailData = {
+        from: "kitchenaroundyou@gmail.com",
+        to: req.body.email,
+        subject: "Account Created successfully",
+        text: `Hello, Welcome to Kitchen Around You.`,
+      };
+      //send email once user register
+      transporter.sendMail(mailData, (err, info) => {
+        if (err) return res.status(400).json({ error: err });
+        res.json(dbUserData);
+      });
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
