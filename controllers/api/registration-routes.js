@@ -33,6 +33,7 @@ router.get("/:id", (req, res) => {
 //create registration
 router.post("/", (req, res) => {
   if (req.session) {
+    console.log("session id is : " + req.session.user_id, "program id is" + req.body.program_id);
     Registration.create(
       {
         user_id: req.session.user_id,
