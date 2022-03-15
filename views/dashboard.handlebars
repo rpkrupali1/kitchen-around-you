@@ -6,13 +6,13 @@
     <div class="box">
       <a
         class="subtitle pb-1"
-        href="/program/{{program.id}}"
-      >{{program.title}}</a>
+        href="/program/{{registration.program.id}}"
+      {{registration.program.title}}</a>
       <p class="block">Program dates:
-        {{format_date program.from_date}}
+        {{format_date registration.program.from_date}}
         -
-        {{format_date program.to_date}}</p>
-      <p class="block">Tuition cost: ${{program.tution}}</p>
+        {{format_date registration.program.to_date}}</p>
+      <p class="block">Tuition cost: ${{registration.program.tution}}</p>
     </div>
 
   {{/each}}

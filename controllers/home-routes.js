@@ -23,6 +23,7 @@ router.get("/", (req, res) => {
 
       res.render("homepage", {
         programs,
+        loggedIn: req.session.loggedIn,
       });
     })
     .catch((err) => {
@@ -81,6 +82,7 @@ router.get("/program/:id", (req, res) => {
       // pass data to template
       res.render("program", {
         program,
+        loggedIn: req.session.loggedIn,
       });
     })
     .catch((err) => {

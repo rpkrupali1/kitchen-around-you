@@ -54,7 +54,7 @@ router.get("/", (req, res) => {
       }
       const user = dbUserData.get({ plain: true });
       console.log(user);
-      res.render("dashboard", user);
+      res.render("dashboard", { user, loggedIn: true });
     })
     .catch((err) => {
       console.log(err);
