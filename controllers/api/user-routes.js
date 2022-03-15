@@ -90,7 +90,13 @@ router.post("/", (req, res) => {
       //send email once user register
       transporter.sendMail(mailData, (err, info) => {
         if (err) return res.status(400).json({ error: err });
-        res.json(dbUserData);
+        req.session.save(() => {
+          req.session.user_id = dbUserData.id;
+          req.session.username = dbUserData.username;
+          req.session.loggedIn = true;
+          res.json(dbUserData);
+        });
+        //res.json(dbUserData);
       });
     })
     .catch((err) => {
@@ -156,11 +162,29 @@ router.post("/login", (req, res) => {
       res.status(404).json({ message: "Username and password does not match" });
       return;
     }
-    res.json({
-      user: dbUserData,
-      message: "You are now logged in",
+
+    req.session.save(() => {
+      // declare session variables
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+      res.json({
+        user: dbUserData,
+        message: "You are now logged in",
+      });
     });
   });
+});
+
+// when used logout destroy the session
+router.post("/logout", (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
 });
 
 module.exports = router;
