@@ -9,7 +9,9 @@ const {
   Measurment,
 } = require("../models");
 
-router.get("/", (req, res) => {
+const withAuth = require("../utils/auth");
+
+router.get("/", withAuth, (req, res) => {
   User.findOne({
     attributes: { exclude: ["password"] },
     where: {

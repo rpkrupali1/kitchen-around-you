@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Registration, User } = require("../../models");
 const { transporter } = require("../../utils/mailer");
+const withAuth = require("../../utils/auth");
 
 //get all registrations
 router.get("/", (req, res) => {
@@ -31,9 +32,12 @@ router.get("/:id", (req, res) => {
 });
 
 //create registration
-router.post("/", (req, res) => {
+router.post("/", withAuth, (req, res) => {
   if (req.session) {
-    console.log("session id is : " + req.session.user_id, "program id is" + req.body.program_id);
+    console.log(
+      "session id is : " + req.session.user_id,
+      "program id is" + req.body.program_id
+    );
     Registration.create(
       {
         user_id: req.session.user_id,
