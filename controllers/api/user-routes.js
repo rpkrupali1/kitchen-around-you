@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const { transporter } = require("../../utils/mailer");
+
 const {
   User,
   Registration,
@@ -78,7 +80,25 @@ router.post("/", (req, res) => {
     email: req.body.email,
     password: req.body.password,
   })
-    .then((dbUserData) => res.json(dbUserData))
+    .then((dbUserData) => {
+      const mailData = {
+        from: "kitchenaroundyou@gmail.com",
+        to: req.body.email,
+        subject: "Account Created successfully",
+        text: `Hello, Welcome to Kitchen Around You.`,
+      };
+      //send email once user register
+      transporter.sendMail(mailData, (err, info) => {
+        if (err) return res.status(400).json({ error: err });
+        req.session.save(() => {
+          req.session.user_id = dbUserData.id;
+          req.session.username = dbUserData.username;
+          req.session.loggedIn = true;
+          res.json(dbUserData);
+        });
+        //res.json(dbUserData);
+      });
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -142,11 +162,28 @@ router.post("/login", (req, res) => {
       res.status(404).json({ message: "Username and password does not match" });
       return;
     }
-    res.json({
-      user: dbUserData,
-      message: "You are now logged in",
+    req.session.save(() => {
+      // declare session variables
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+      res.json({
+        user: dbUserData,
+        message: "You are now logged in",
+      });
     });
   });
+});
+
+// when used logout destroy the session
+router.post("/logout", (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
 });
 
 module.exports = router;

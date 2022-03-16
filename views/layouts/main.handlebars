@@ -6,10 +6,11 @@
     <title>Kitchen Around You</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <script src="https://kit.fontawesome.com/d42fb62a1f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
   <body>
       <!-- Begin Navigation -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar bg-yellow" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
             <i class="fa-solid fa-cheese"></i>
@@ -23,11 +24,7 @@
               Home
             </a>
       
-            <a class="navbar-item">
-              Registration
-            </a>
-
-            <a class="navbar-item">
+            <a class="navbar-item" href="https://github.com/rpkrupali1/kitchen-around-you">
                 <i class="fa-brands fa-github"></i>Github
             </a>
       
@@ -37,12 +34,15 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                <a class="button is-link">
+                {{#if loggedIn}}
+                <button class="button is-light" id="logout">Logout</button>
+                <a class="button is-light" href="/dashboard">Dashboard</a>
+                {{else}}
+                <a class="button has-background-primary" href="/login">
                   <strong>Sign up</strong>
                 </a>
-                <a class="button is-light">
-                  Log in
-                </a>
+                <a class="button is-light" href="/login">Log in</a>
+                {{/if}}
               </div>
             </div>
           </div>
@@ -53,6 +53,8 @@
       <main>
           {{{ body }}}
       </main>
-
+      {{!-- {{#if loggedIn}} --}}
+      <script src="/javascript/logout.js"></script>
+      {{!-- {{/if}} --}}
   </body>
 </html>

@@ -1,0 +1,22 @@
+<div class="box">
+    <h1 class="title">{{program.title}}</h1>
+    <div class="block">Course dates: {{format_date program.from_date}} - {{format_date program.to_date}}</div>
+    <div class="block">
+        <h2 class="subtitle pb-2">Course Description:</h2>
+        {{program.description}}
+    </div>
+    <div class="block">
+        Course fees: ${{program.tution}}
+    </div>
+    <div class="block">
+        Course Materials/Ingredients needed:
+        <ul>
+            {{> ingredients program.programdetails}}
+        </ul>
+    </div>
+    <div class="block register-btn">
+        <button class="button is-primary" type="button">Register Class</button>
+    </div>
+</div>
+
+<script src="/javascript/register.js"></script>
