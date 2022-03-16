@@ -8,6 +8,7 @@ const {
   Ingredient,
   Measurment,
 } = require("../models");
+const withAuth = require("../utils/auth");
 
 // Get homepage handlebar template
 router.get("/", (req, res) => {
