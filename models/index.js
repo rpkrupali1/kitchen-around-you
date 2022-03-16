@@ -35,6 +35,7 @@ User.hasMany(Registration, {
 
 Registration.belongsTo(User, {
   foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
 Program.hasMany(Registration, {
