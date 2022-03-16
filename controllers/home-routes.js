@@ -35,7 +35,7 @@ router.get("/", (req, res) => {
 // Get login handlebar template
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect("/");
+    res.redirect("/dashboard");
     return;
   }
   res.render("login");
