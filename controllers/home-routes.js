@@ -8,6 +8,7 @@ const {
   Ingredient,
   Measurment,
 } = require("../models");
+const withAuth = require("../utils/auth");
 
 // Get homepage handlebar template
 router.get("/", (req, res) => {
@@ -35,7 +36,7 @@ router.get("/", (req, res) => {
 // Get login handlebar template
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect("/");
+    res.redirect("/dashboard");
     return;
   }
   res.render("login");

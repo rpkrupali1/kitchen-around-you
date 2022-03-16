@@ -1,19 +1,19 @@
 <section class="section">
   <h1 class="title">Your Registered Classes:</h1>
 
-  {{#each registrations as |registration|}}
-
+  {{#each user.registrations as |registration|}}
     <div class="box">
       <a
         class="subtitle pb-1"
         href="/program/{{registration.program.id}}"
-      {{registration.program.title}}</a>
-      <p class="block">Program dates:
+      >{{registration.program.title}}</a>
+      <p class="block">
+        Program dates:
         {{format_date registration.program.from_date}}
         -
         {{format_date registration.program.to_date}}</p>
       <p class="block">Tuition cost: ${{registration.program.tution}}</p>
     </div>
-
   {{/each}}
+
 </section>
