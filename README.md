@@ -1,4 +1,5 @@
 # kitchen-around-you
+Find cooking program that interests you so that you can register for a class. 
 
 # Table of contents
 
