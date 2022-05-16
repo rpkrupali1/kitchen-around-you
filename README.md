@@ -3,7 +3,7 @@ Find cooking program that interests you so that you can register for a class.
 
 # Table of contents
 
-- [What We Do](#what-we-dopose)
+- [What We Do](#what-we-do)
 - [Concept](#concept)
 - [Deployed Application](#deployed-application)
 - [Technologies Used](#technologies-used)
